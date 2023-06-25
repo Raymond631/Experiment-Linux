@@ -1,8 +1,8 @@
 **以下内容基于CentOS 7，建议使用MobaXterm等SSH工具远程连接，比图形化界面更好用**
 如有问题，恳请指正~
-> 2023-6-25更新：添加操作日志；nginx调整conf.d的路径；添加redis-cli软链接；
-> 2023-6-17更新：nginix结合部署需要，添加了一些内容
-> 2023-6-15更新：springboot 6 不支持 tomcat 9 ,故改为安装tomcat 10 (不过tomcat 10 不支持 java 8 ,老项目请斟酌)  
+> 2023-6-25更新：添加操作日志；nginx调整conf.d的路径；添加redis-cli软链接；  
+> 2023-6-17更新：nginix结合部署需要，添加了一些内容  
+> 2023-6-15更新：springboot 6 不支持 tomcat 9 ,故改为安装tomcat 10 (不过tomcat 10 不支持 java 8 ,老项目请斟酌)    
 # 前置工作（可选）
 ## 添加操作日志
 ```
