@@ -1,0 +1,51 @@
+version: "3"  
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf/my.cnf:/etc/mysql/my.cnf
+    privileged: true
+    environment:
+      - MYSQL_ROOT_PASSWORD='123456'
+      - MYSQL_DATABASE='jpetstore'
+      - TZ=Asia/Shanghai
+    ports:
+      - "3000:3306" 
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    command: redis-server
+    privileged: true
+    ports:
+      - "4000:6379"
+
+  springboot: 
+    build: ./springboot
+    image: springboot:1.0
+    container_name: springboot
+    privileged: true 
+    volumes:
+      - ./springboot/log:/log
+      - ./springboot/PetImage:/PetImage
+    ports:
+      - "6000:8080"
+    depends_on: 
+      - mysql
+      - redis
+
+  nginx:
+    image: nginx:latest
+    privileged: true 
+    volumes:
+      - ./nginx/conf:/etc/nginx
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/log:/var/log/nginx
+    ports:
+      - "5000:80"
+    depends_on: 
+      - springboot
